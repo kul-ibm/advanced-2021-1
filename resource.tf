@@ -2,17 +2,17 @@ resource "aws_instance" "server" {
   ami = "ami-0996d3051b72b5b2c"
   instance_type = "t2.micro"
   tags = {
-    "Name" = "thinknyx-kul-self"
+    "Name" = var.tagName
   }
   vpc_security_group_ids = [ aws_security_group.secGroup.id ]
 }
 
 resource "aws_security_group" "secGroup" {
-  name = "thinknyx-kul-self"
+  name = var.tagName
   description = "Managed by Terraform"
   vpc_id = data.aws_vpc.defaultVPC.id
   tags = {
-    "Name" = "thinknyx-kul-self"
+    "Name" = var.tagName
   }
   egress {
     protocol = "-1"

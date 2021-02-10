@@ -36,3 +36,10 @@ resource "aws_ebs_volume" "ebs" {
     "Name" = var.tagName
   }
 }
+
+resource "aws_volume_attachment" "attachEBS" {
+  volume_id = aws_ebs_volume.ebs.id
+  instance_id = aws_instance.server.id
+  skip_destroy = true
+  device_name = "/dev/sdf"
+}

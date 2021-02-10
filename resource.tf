@@ -28,3 +28,11 @@ resource "aws_security_group" "secGroup" {
     description = "SSH Access"
   }
 }
+
+resource "aws_ebs_volume" "ebs" {
+  size = var.size
+  availability_zone = aws_instance.server.availability_zone
+  tags = {
+    "Name" = var.tagName
+  }
+}

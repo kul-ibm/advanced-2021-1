@@ -43,3 +43,10 @@ resource "aws_volume_attachment" "attachEBS" {
   skip_destroy = true
   device_name = "/dev/sdf"
 }
+
+resource "aws_efs_file_system" "efs" {
+  creation_token = var.tagName
+  tags = {
+    "Name" = var.tagName
+  }
+}

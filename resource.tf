@@ -50,3 +50,10 @@ resource "aws_efs_file_system" "efs" {
     "Name" = var.tagName
   }
 }
+
+resource "aws_efs_mount_target" "mountTarget" {
+  for_each = data.aws_subnet_ids.sn-ids.ids
+  file_system_id = aws_efs_file_system.efs.id
+  security_groups = [ aws_security_group.secGroup.id ]
+  subnet_id = each.value
+}

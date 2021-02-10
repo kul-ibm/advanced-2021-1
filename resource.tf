@@ -4,6 +4,7 @@ resource "aws_instance" "server" {
   tags = {
     "Name" = "thinknyx-kul-self"
   }
+  vpc_security_group_ids = [ aws_security_group.secGroup.id ]
 }
 
 resource "aws_security_group" "secGroup" {

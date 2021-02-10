@@ -4,3 +4,7 @@ data "aws_vpc" "defaultVPC" {
     values = ["default"]
   }
 }
+
+data "aws_subnet_ids" "sn-ids"{
+  vpc_id = data.aws_vpc.defaultVPC.id
+}

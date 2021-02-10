@@ -4,3 +4,6 @@ output "defaultVPC_ID" {
 output "secGroup_ID" {
   value = aws_security_group.secGroup.id
 }
+output "subnet_ids" {
+  value = data.aws_subnet_ids.sn-ids.ids
+}

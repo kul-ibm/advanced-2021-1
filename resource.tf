@@ -5,3 +5,12 @@ resource "aws_instance" "server" {
     "Name" = "thinknyx-kul-self"
   }
 }
+
+resource "aws_security_group" "secGroup" {
+  name = "thinknyx-kul-self"
+  description = "Managed by Terraform"
+  vpc_id = data.aws_vpc.defaultVPC.id
+  tags = {
+    "Name" = "thinknyx-kul-self"
+  }
+}

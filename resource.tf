@@ -5,6 +5,7 @@ resource "aws_instance" "server" {
     "Name" = var.tagName
   }
   vpc_security_group_ids = [ aws_security_group.secGroup.id ]
+  key_name = "kul-labs"
 }
 
 resource "aws_security_group" "secGroup" {
@@ -40,7 +41,8 @@ resource "aws_ebs_volume" "ebs" {
 resource "aws_volume_attachment" "attachEBS" {
   volume_id = aws_ebs_volume.ebs.id
   instance_id = aws_instance.server.id
-  skip_destroy = true
+  skip_destroy = false
+  force_detach = true
   device_name = "/dev/sdf"
 }
 

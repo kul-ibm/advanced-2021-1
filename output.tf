@@ -7,3 +7,6 @@ output "secGroup_ID" {
 output "subnet_ids" {
   value = data.aws_subnet_ids.sn-ids.ids
 }
+output "server_public_ip" {
+  value = aws_instance.server.public_ip
+}

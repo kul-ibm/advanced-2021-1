@@ -12,4 +12,5 @@ resource "null_resource" "mountEBS" {
       "sudo chown ubuntu:ubuntu /opt"
     ]
   }
+  depends_on = [ aws_volume_attachment.attachEBS ]
 }

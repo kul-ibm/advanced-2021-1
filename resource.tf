@@ -28,6 +28,13 @@ resource "aws_security_group" "secGroup" {
     cidr_blocks = ["0.0.0.0/0"]
     description = "SSH Access"
   }
+  ingress {
+    protocol = "tcp"
+    from_port = 2049
+    to_port = 2049
+    cidr_blocks = ["172.31.0.0/16"]
+    description = "NFS Access"
+  }
 }
 
 resource "aws_ebs_volume" "ebs" {

@@ -1,6 +1,9 @@
 output "defaultVPC_ID" {
   value = data.aws_vpc.defaultVPC.id
 }
+output "defaultVPC_CIDR_BLOCK" {
+  value = data.aws_vpc.defaultVPC.cidr_block
+}
 output "secGroup_ID" {
   value = aws_security_group.secGroup.id
 }

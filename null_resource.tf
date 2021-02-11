@@ -31,3 +31,21 @@ resource "null_resource" "mountEFS" {
   }
   depends_on = [ aws_efs_mount_target.mountTarget ]
 }
+
+resource "null_resource" "installAnsible" {
+  provisioner "remote-exec" {
+    connection {
+      type = "ssh"
+      user = "ubuntu"
+      host = aws_instance.server.public_ip
+      private_key = file("c:/training/kul-labs.pem")
+    }
+    inline = [
+      "sudo apt-get install -y ansible",
+      "ansible --version"
+    ]
+  }
+  triggers = {
+    build = timestamp()
+  }
+}

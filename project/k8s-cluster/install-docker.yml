@@ -47,5 +47,5 @@
       become: true
       service:
         name: docker
-        start: started
+        state: started
         enabled: yes

@@ -6,4 +6,9 @@ resource "aws_instance" "node" {
   tags = {
     "Name" = "${var.tagName}-Node"
   }
+  count = 2
+}
+
+output "masterServer_Node_private_IP" {
+  value = aws_instance.node.*.private_ip
 }

@@ -15,11 +15,7 @@ resource "aws_instance" "master" {
     }
     inline = [
       "sudo hostnamectl set-hostname masterServer",
-      "sudo apt-get update -y",
-      "sudo apt-get install -y ansible",
-      "sudo echo '${self.private_ip} masterServer >> /etc/hosts'",
-      "sudo echo '[master] > /etc/ansible/hosts'",
-      "sudo echo '${self.private_ip} >> /etc/ansible/hosts'"
+      "sudo apt-get update -y && sudo apt-get install -y ansible && sudo chown -R ubuntu:users /etc/ansible && sudo echo [master] > /etc/ansible/hosts && sudo echo ${self.private_ip} >> /etc/ansible/hosts"
     ]
   }
 }

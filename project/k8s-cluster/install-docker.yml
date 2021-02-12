@@ -43,3 +43,8 @@
       copy:
         src: daemon.json
         dest: /etc/docker/daemon.json
+    - name: Start Docker
+      service:
+        name: docker
+        start: started
+        enabled: yes

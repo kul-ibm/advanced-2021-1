@@ -49,6 +49,13 @@
         name: docker
         state: started
         enabled: yes
+    
+    - name: Updating permission for docker.sock
+      file:
+        path: /var/run/docker.sock
+        state: file
+        owner: centos
+        group: users
         
   handlers: 
     - name: restart-docker

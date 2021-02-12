@@ -1,9 +1,9 @@
 ---
 - name: Initialising & Configuring Master for Usage
   hosts: master
-  become: true
   tasks: 
   - name: Initialising Master
+    become: true
     shell: echo 1 > /proc/sys/net/bridge/bridge-nf-call-iptables && kubeadm init --apiserver-advertise-address={{ ansible_eth0.ipv4.address }}
     register: output
     ignore_errors: yes

@@ -1,9 +1,10 @@
 ---
 - name: Install Docker
   hosts: all
-
+  
   tasks:
     - name: Install packages to allow apt to use a repository over HTTPS
+      become: true
       apt:
         pkg: "{{ item }}"
         state: present
@@ -13,4 +14,3 @@
         - curl
         - software-properties-common
         - gnupg2
-        

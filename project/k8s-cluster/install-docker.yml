@@ -3,6 +3,11 @@
   hosts: all
   
   tasks:
+    - name: update pkgs
+      become: true
+      apt:
+        update_cache: yes
+        force_apt_get: yes
     - name: Install packages to allow apt to use a repository over HTTPS
       become: true
       apt:

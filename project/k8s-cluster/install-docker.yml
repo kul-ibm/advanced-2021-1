@@ -39,6 +39,7 @@
         path: /etc/docker
         state: directory
     - name: move daemon.json
+      become: true
       copy:
         src: daemon.json
         dest: /etc/docker/daemon.json

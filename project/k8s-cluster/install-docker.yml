@@ -32,6 +32,4 @@
       become: true
       apt:
         pkg:
-          - containerd
-          - docker-ce
-          - docker-ce-cli
+          - docker

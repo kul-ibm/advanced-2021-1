@@ -1,7 +1,7 @@
 ---
 - name: Attaching Worker
   hosts: all
-  
+  become: true
   tasks: 
   - name: copying join command script
     when: inventory_hostname in groups['worker']
@@ -9,8 +9,7 @@
       src: join-command.sh
       dest: /tmp/
       mode: 755
-      
-      
+
   - name: Run join command
     shell: kubectl get nodes
     register: getNodes

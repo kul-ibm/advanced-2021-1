@@ -20,7 +20,7 @@ resource "aws_instance" "k8s-master" {
 			host = self.public_ip
 		}
 		inline = [
-			"sudo yum install -y epel-release && sudo yum install -y ansible && sudo hostnamectl set-hostname k8s-master && sudo chown -R centos:users /etc/ansible/ && sudo echo [master] > /etc/ansible/hosts && sudo echo ${self.private_ip} >> /etc/ansible/hosts && sudo echo [worker] >> /etc/ansible/hosts"
+			"sudo yum install -y epel-release && sudo yum install -y ansible git && sudo hostnamectl set-hostname k8s-master && sudo chown -R centos:users /etc/ansible/ && sudo echo [master] > /etc/ansible/hosts && sudo echo ${self.private_ip} >> /etc/ansible/hosts && sudo echo [worker] >> /etc/ansible/hosts"
 		]
 	}
 	provisioner "file" {

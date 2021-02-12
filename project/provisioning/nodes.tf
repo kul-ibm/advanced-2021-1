@@ -7,6 +7,17 @@ resource "aws_instance" "node" {
     "Name" = "${var.tagName}-Node"
   }
   count = 2
+  provisioner "remote-exec" {
+    connection {
+      type = "ssh"
+      user = "ubuntu"
+      private_key = file("c:/training/kul-labs.pem")
+      host = aws_instance.master.public_ip
+    }
+    inline = [
+      "sudo echo ${self.private_ip} >> /etc/ansible/hosts"
+    ]
+  }
 }
 
 output "Nodes_private_IP" {

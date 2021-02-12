@@ -44,6 +44,7 @@
         src: daemon.json
         dest: /etc/docker/daemon.json
     - name: Start Docker
+      become: true
       service:
         name: docker
         start: started

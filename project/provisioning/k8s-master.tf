@@ -16,7 +16,7 @@ resource "aws_instance" "k8s-master" {
 		connection {
 			type = "ssh"
 			user = "centos"
-			private_key = file("c:/training/kul-labs.pem")
+			private_key = file(var.keyPath)
 			host = self.public_ip
 		}
 		inline = [
@@ -27,7 +27,7 @@ resource "aws_instance" "k8s-master" {
 		connection {
 			type = "ssh"
 			user = "centos"
-			private_key = file("c:/training/kul-labs.pem")
+			private_key = file(var.keyPath)
 			host = self.public_ip
 		}
 		source = var.keyPath

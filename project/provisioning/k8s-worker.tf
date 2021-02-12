@@ -17,7 +17,7 @@ resource "aws_instance" "k8s-worker" {
 		connection {
 			type = "ssh"
 			user = "centos"
-			private_key = file("c:/training/kul-labs.pem")
+			private_key = file(var.keyPath)
 			host = aws_instance.k8s-master.public_ip
 		}
 		inline = [

@@ -17,3 +17,7 @@ variable "node_instance_count" {
 variable "name" {
 	type = string
 }
+variable "keyPath" {
+  type = string
+  description = "add the location where pem files exist, e.g. c:/training/kul-labs.pem"
+}

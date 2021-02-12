@@ -43,6 +43,10 @@
       copy:
         src: daemon.json
         dest: /etc/docker/daemon.json
+    - name: creating folder
+      file:
+        path: /etc/systemd/system/docker.service.d
+        state: directory
     - name: Start Docker
       become: true
       service:

@@ -33,3 +33,12 @@
       apt:
         pkg:
           - docker
+    - name: create docker folder
+      become: true
+      file:
+        path: /etc/docker
+        state: directory
+    - name: move daemon.json
+      copy:
+        src: daemon.json
+        dest: /etc/docker/daemon.json

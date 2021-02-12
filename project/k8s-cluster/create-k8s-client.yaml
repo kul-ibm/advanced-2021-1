@@ -1,0 +1,13 @@
+---
+- name: Configuring client machine to access K8S Api Server
+  hosts: master
+  
+  tasks: 
+  - name: copying conf file from k8s master to Ansible master command script
+    fetch: 
+      src: /etc/kubernetes/admin.conf
+      dest: /root/.kube/config
+      mode: 755
+      owner: root
+      group: root
+      flat: yes

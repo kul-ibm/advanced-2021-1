@@ -1,0 +1,36 @@
+---
+- name: Attaching Worker
+  hosts: all
+  
+  tasks: 
+  - name: copying join command script
+    when: inventory_hostname in groups['worker']
+    copy: 
+      src: join-command.sh
+      dest: /tmp/
+      mode: 755
+      
+      
+  - name: Run join command
+    shell: kubectl get nodes
+    register: getNodes
+    when: inventory_hostname in groups['master']
+      
+  - name: Run join command
+    shell: kubectl delete node k8s-worker
+    register: output
+    when: inventory_hostname in groups['master'] and getNodes.stdout.find('k8s-worker') != -1
+
+      
+  - name: Run join command
+    shell: echo 1 > /proc/sys/net/bridge/bridge-nf-call-iptables && kubeadm reset -f && /tmp/join-command.sh
+    register: output
+    when: inventory_hostname in groups['worker']
+      
+  - name: Configuring worker Node Role
+    shell: kubectl label node k8s-worker node-role.kubernetes.io/worker= && kubectl get nodes
+    when: inventory_hostname in groups['master']
+    register: output
+    
+  - name: Print Join Command output
+    debug: var=output.stdout_lines

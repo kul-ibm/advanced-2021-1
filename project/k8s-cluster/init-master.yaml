@@ -1,0 +1,39 @@
+---
+- name: Initialising & Configuring Master for Usage
+  hosts: master
+  
+  tasks: 
+  - name: Initialising Master
+    shell: echo 1 > /proc/sys/net/bridge/bridge-nf-call-iptables && kubeadm init --apiserver-advertise-address={{ ansible_eth0.ipv4.address }}
+    register: output
+    ignore_errors: yes
+
+  - name: Setting KUBECONFIG
+    file: 
+      path: "{{ ansible_user_dir }}/.kube"
+      state: directory
+      
+  - name: copying config file
+    copy: 
+      remote_src: yes
+      src: /etc/kubernetes/admin.conf
+      dest: "{{ ansible_user_dir }}/.kube/config"
+      owner: "{{ ansible_user_id }}"
+      group: "{{ ansible_user_gid }}"
+      
+  - name: configuring POD network
+    shell: kubectl apply -f https://docs.projectcalico.org/v3.11/manifests/calico.yaml && sleep 10 && kubectl get nodes
+    register: output
+    
+  - name: Generating Join Command
+    shell: kubeadm token create --print-join-command | grep -i kubeadm > /tmp/join-command.sh
+    
+  - name: Fetching Join Command from k8s master to Ansible Master
+    fetch: 
+      src: /tmp/join-command.sh
+      dest: join-command.sh
+      mode: 755
+      flat: yes
+      
+  - name: Printing output on Console
+    debug: var=output.stdout_lines

@@ -1,8 +1,8 @@
-resource "aws_security_group" "sg" {
-  name = var.tagName
+resource "aws_security_group" "security_group" {
+  name = var.name
   description = "K8S Security Group, Managed by Terraform"
   tags = {
-    "Name" = var.tagName
+    "Name" = var.name
   }
   ingress {
       from_port = "22"

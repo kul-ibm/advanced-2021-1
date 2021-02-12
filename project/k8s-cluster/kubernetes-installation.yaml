@@ -1,7 +1,7 @@
 ---
 - name: Installing KUBEADM, KUBELET, KUBECTL
   hosts: all
-  
+  become: true
   tasks: 
   
   - name: copy kubernetes repo

@@ -23,3 +23,16 @@ resource "aws_instance" "master" {
 output "masterServer_Public_IP" {
   value = aws_instance.master.public_ip
 }
+
+resource "null_resource" "copyKey" {
+  provisioner "file" {
+    connection {
+      type = "ssh"
+      user = "ubuntu"
+      private_key = file("c:/training/kul-labs.pem")
+      host = aws_instance.master.public_ip
+    }
+    source = "c:/training/kul-labs.pem"
+    destination = "kul-labs.pem"
+  }
+}

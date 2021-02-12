@@ -9,6 +9,6 @@ resource "aws_instance" "node" {
   count = 2
 }
 
-output "masterServer_Node_private_IP" {
+output "Nodes_private_IP" {
   value = aws_instance.node.*.private_ip
 }

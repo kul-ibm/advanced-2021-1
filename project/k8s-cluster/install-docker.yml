@@ -6,10 +6,11 @@
     - name: Install packages to allow apt to use a repository over HTTPS
       apt:
         pkg: "{{ item }}"
-        state: installed
+        state: present
       with_items:
         - apt-transport-https
         - ca-certificates
         - curl
         - software-properties-common
         - gnupg2
+        
